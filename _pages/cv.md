@@ -18,13 +18,13 @@ Education
 
 Work Experience
 ======
-* Head Teaching Assistant for Statistics I & II, 
+* Head Teaching Assistant for Statistics I & II, Oct 17 - Sep 18 & Oct 19 - Sep 20
   * Karlsruhe Institute of Technology, Department of Economics
   * Supervision of 15 undergraduate teaching assistants
   * Organisation of tutorials and exams for up to 800 Students
 
 
-* Head Teaching Assistant for Programming in R
+* Head Teaching Assistant for Programming in R, Oct 16 - Sep 17
   * Karlsruhe Institute of Technology, Department of Economics
   * Introducing groups of up to 100 to programming in R
 
