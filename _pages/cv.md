@@ -11,30 +11,27 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* PhD in Machine Learning & Statistics, University of Oxford, 2023 (expected)
+* MSc in Mathematics with minor in Economics, Karlsruhe Institute of Technology, 2020
+* MSc in Statistical Science, University of Oxford, 2019
+* BSc in Mathematics with minor in Economics, Karlsruhe Institute of Technology, 2017
 
-Work experience
+Work Experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Head Teaching Assistant for Statistics I & II, 
+  * Karlsruhe Institute of Technology, Department of Economics
+  * Supervision of 15 undergraduate teaching assistants
+  * Organisation of tutorials and exams for up to 800 Students
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-  
+
+* Head Teaching Assistant for Programming in R
+  * Karlsruhe Institute of Technology, Department of Economics
+  * Introducing groups of up to 100 to programming in R
+
 Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Languages: German (native) and Englisch (fluent)
+* Coding: Python (expert), Java (advanced), R (advanced), Matlab (basic)
 
 Publications
 ======
@@ -54,6 +51,9 @@ Teaching
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Service and leadership
+[More details can be found here](http://veitwild.github.io/files/cv_wild.pdf)
+
+<!--Service and leadership
 ======
 * Currently signed in to 43 different slack teams
+-->
