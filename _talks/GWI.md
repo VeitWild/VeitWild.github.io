@@ -3,7 +3,7 @@ title: "Gaussian Wasserstein Inference: Gaussian Measures meet Bayesian Deep Lea
 collection: talks
 type: "Talk"
 permalink: /talks/GWI
-venue: "The Alan Turing Institute, Data-Centric Engineering Seminar"
+venue: "Alan Turing Institute, Data-Centric Engineering Seminar"
 date: 2022-05-25
 location: "London, UK"
 ---
