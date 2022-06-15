@@ -44,14 +44,16 @@ Talks
   <ul>{% for post in site.talks %}
     {% include archive-single-talk-cv.html %}
   {% endfor %}</ul>
-  
-Teaching
+
+[My full CV can be downloaded here](http://veitwild.github.io/files/cv_wild.pdf)  
+
+<!--Teaching
 ======
   <ul>{% for post in site.teaching %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-[More details can be found here](http://veitwild.github.io/files/cv_wild.pdf)
+
 
 <!--Service and leadership
 ======
