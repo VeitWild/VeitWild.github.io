@@ -30,7 +30,7 @@ Work Experience
 
 Skills
 ======
-* Languages: German (native) and Englisch (fluent)
+* Languages: German (native) and English (fluent)
 * Coding: Python (expert), Java (advanced), R (advanced), Matlab (basic)
 
 Publications
