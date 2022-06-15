@@ -8,4 +8,10 @@ redirect_from:
   - /about.html
 ---
 
-I am a Researcher who makes good research.
+
+I am currently a 2nd PhD Student in Machine Learning and Statistics at the University of Oxford. My supervisor is [Dino Sejdinovic](https://www.stats.ox.ac.uk/~sejdinov/) and my CV can be found [here](http://veitwild.github.io/files/cv_wild.pdf).
+
+My research interest focusses on the use of modern probability theory to improve Statistical inference.
+In particular I have worked on Gaussian measures in (infinite dimensional) Hilbert and Banach spaces. I am currently most interested in how we can leverage Gaussian measures and the function space perspective to improve the uncertainty quantification of Machine learning algorithms. 
+
+If you take an interest in these subjects, feel free to reach out to me at veit.wild@stats.ox.ac.uk!
