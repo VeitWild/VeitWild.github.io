@@ -14,4 +14,4 @@ I am currently a 2nd PhD Student in Machine Learning and Statistics at the Unive
 My research focusses on the use of modern probability theory to improve statistical inference.
 In particular I have worked on Gaussian measures in (infinite dimensional) Hilbert and Banach spaces. I am currently most interested in how we can leverage Gaussian measures and the function space perspective to improve the uncertainty quantification for large scale Machine Learning applications. 
 
-If you take an interest in these subjects, feel free to reach out to me at veit.wild@stats.ox.ac.uk!
+If you take an interest in these subjects, feel free to reach out to me at veit.wild at stats.ox.ac.uk!
