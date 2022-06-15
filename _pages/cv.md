@@ -45,8 +45,6 @@ Talks
     {% include archive-single-talk-cv.html %}
   {% endfor %}</ul>
 
-[My full CV can be downloaded here](http://veitwild.github.io/files/cv_wild.pdf)  
-
 <!--Teaching
 ======
   <ul>{% for post in site.teaching %}
