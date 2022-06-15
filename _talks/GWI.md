@@ -4,7 +4,7 @@ collection: talks
 type: "Talk"
 permalink: /talks/GWI
 venue: "Alan Turing Institute, Data-Centric Engineering Seminar"
-date: 2022-25-05
+date: 2022-05-25
 location: "London, UK"
 ---
 
