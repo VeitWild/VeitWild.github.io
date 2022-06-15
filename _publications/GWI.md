@@ -2,11 +2,11 @@
 title: "Generalized Variational Inference in Function Spaces: Gaussian Measures meet Bayesian Deep Learning"
 collection: publications
 permalink: /publication/GWI
-excerpt: 'We develop a framework for generalized variational inference in infinite-dimensional function spaces and use it to construct a method termed Gaussian Wasserstein inference (GWI).'
+excerpt: 'We develop a framework for generalized variational inference in infinite-dimensional function spaces and use it to construct a method termed Gaussian Wasserstein inference (GWI)...'
 date: 2022-05-12
 venue: 'arxiv'
 paperurl: ''
-citation: 'Veit D. Wild*, Robert Hu* and Dino Sejdinovic (2022). &quot;Generalized Variational Inference in Function Spaces: Gaussian Measures meet Bayesian Deep Learning.&quot; <i> arXiv preprint arXiv:2205.06342. </i>'
+citation: 'Veit D. Wild, Robert Hu and Dino Sejdinovic (2022). &quot;Generalized Variational Inference in Function Spaces: Gaussian Measures meet Bayesian Deep Learning.&quot; <i> arXiv preprint arXiv:2205.06342. </i>'
 ---
 We develop a framework for generalized variational inference in infinite-dimensional function spaces and use it to construct a method termed Gaussian
 Wasserstein inference (GWI). GWI leverages the Wasserstein distance between
