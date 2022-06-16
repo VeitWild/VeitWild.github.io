@@ -2,7 +2,7 @@
 title: "Bayesian Kernel Two-Sample Testing"
 collection: publications
 permalink: /publication/two_sample_test
-excerpt: 'In modern data analysis, nonparametric measures of discrepancies between random variables are particularly important. The subject is well-studied in the frequentist literature, while the development in the Bayesian setting is limited where applications are often restricted to univariate cases. '
+excerpt: 'In modern data analysis, nonparametric measures of discrepancies between random variables are particularly important. The subject is well-studied in the frequentist literature, while the development in the Bayesian setting is limited where applications are often restricted to univariate cases... '
 date: 2022-04-23
 venue: 'Journal of Computational and Graphical Statistics'
 paperurl: ''
