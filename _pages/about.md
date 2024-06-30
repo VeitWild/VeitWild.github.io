@@ -9,9 +9,10 @@ redirect_from:
 ---
 
 
-I am currently a 2nd year PhD Student in Machine Learning and Statistics at the University of Oxford. My supervisor is [Dino Sejdinovic](https://www.stats.ox.ac.uk/~sejdinov/) in the Department of Statistics. My CV can be found [here](http://veitwild.github.io/files/cv_wild.pdf).
+I recently graduated from the University of Oxford and recieved a PhD in Statistics. My supervisors were [Dino Sejdinovic](https://www.stats.ox.ac.uk/~sejdinov/) and [George Deligiannidis](https://www.stats.ox.ac.uk/~deligian/).
 
-My research focuses on the use of modern probability theory to improve statistical inference.
-In particular I have worked on Gaussian measures in (infinite dimensional) Hilbert and Banach spaces. I am currently most interested in how we can leverage Gaussian measures and the function space perspective to improve the uncertainty quantification for large scale Machine Learning applications. 
+My CV can be found [here](http://veitwild.github.io/files/cv_wild.pdf).
+
+During my PhD my research focused on generalised Bayesian methods in function spaces. In particular I used tools from infinite-dimensional Analysis to improve the theoretical understanding and develop new machine learning algorithms with improved uncertainity quantification. 
 
 If you take an interest in these subjects, feel free to reach out to me at veit.wild at stats.ox.ac.uk!
