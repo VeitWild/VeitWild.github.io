@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I recently graduated from the University of Oxford and recieved a PhD in Statistics. My supervisors were [Dino Sejdinovic](https://www.stats.ox.ac.uk/~sejdinov/) and [George Deligiannidis](https://www.stats.ox.ac.uk/~deligian/).
+I recently graduated from the University of Oxford and recieved a PhD in Statistics. My supervisors were [Dino Sejdinovic](https://sejdino.github.io/) and [George Deligiannidis](https://www.stats.ox.ac.uk/~deligian/).
 
 My CV can be found [here](http://veitwild.github.io/files/cv_wild.pdf).
 
