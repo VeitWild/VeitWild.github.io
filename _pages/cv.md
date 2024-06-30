@@ -11,7 +11,7 @@ redirect_from:
 
 Education
 ======
-* PhD in Machine Learning & Statistics, University of Oxford, 2023 (expected)
+* PhD in Machine Learning & Statistics, University of Oxford, 2024
 * MSc in Mathematics with minor in Economics, Karlsruhe Institute of Technology, 2020
 * MSc in Statistical Science, University of Oxford, 2019
 * BSc in Mathematics with minor in Economics, Karlsruhe Institute of Technology, 2017
