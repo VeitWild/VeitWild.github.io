@@ -33,10 +33,10 @@ $$
   dX(t) &= - X(t) \, dt + \sigma(t) \, d B(t),
 \end{align}
 $$
-where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $(B(t))_{t ≥ 0}$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
+where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $(B(t))_{t > 0}$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
 $$
 \begin{align}
-    X_{x_0}(t) \sim \mathcal{N}\big( m(t), \Sigma(t) I_D \big) 
+    X_{x_0}(t) \sim \mathcal{N} ( m(t), \Sigma(t) I_D ) 
 \end{align}    
 $$ 
 where 
@@ -53,7 +53,7 @@ The diffusion coefficient $\sigma(t)$ determines the noise schedule and is part 
 Another crucial point to notice is that we can infer the long term behaviour of the SDE from (1). Specifically since $m(t) \to 0$ as $t \to \infty$ (exponentially fast), we find that 
 $$
 \begin{align}
-  X_{x_0}(t) \approx \mathcal{N}\big(0 , \Sigma(t) I_D \big)
+  X_{x_0}(t) \approx \mathcal{N} (0 , \Sigma(t) I_D )
 \end{align}
 $$
 for large enough $t >0$ and arbitrary $x_0 \in \mathbb{R}^D$. The RHS of (6) can again be easily sampled from as long as we have access to $\Sigma(t)$, which is usually the case by construction of $\sigma(t)$.
@@ -65,13 +65,13 @@ $$
     dX(t) &= - X(t) \, dt + \sigma(t) \, d B(t)
 \end{align}
 $$
-We denote the solution to this SDE as $\big( X(t) \big)_{t=0}^T$ (suppressing the $P$ subscript for notational convenience). Notice that it is easy to produce samples from $X(t)$ via
+We denote the solution to this SDE as $( X(t) )_{t=0}^T$ (suppressing the $P$ subscript for notational convenience). Notice that it is easy to produce samples from $X(t)$ via
 $$
 \begin{align}
     X(t) \sim \exp(-t) X_0 +  \sqrt{\Sigma(t)} \epsilon
 \end{align}
 $$
-with $\epsilon \sim N(0,1)$ and $X_0 \sim P$. However, we don't have a closed form expression for it's Lesbegue density $p_t$. More formally, we define $P(t):= \text{Law} \big[ X(t) \big]$ and $P(t|x_0) := \text{Law} \big[ X_{x_0}(t) \big] $
+with $\epsilon \sim N(0,1)$ and $X_0 \sim P$. However, we don't have a closed form expression for it's Lesbegue density $p_t$. More formally, we define $P(t):= \text{Law} [ X(t) ]$ and $P(t|x_0) := \text{Law} [ X_{x_0}(t) ] $
 and note that
 $$ 
 \begin{align}
