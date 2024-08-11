@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 
-My publication record can be found on [google scholar](https://scholar.google.com/citations?user=gUUTqicAAAAJ&hl=en)
+My publication record can be found on [google scholar](https://scholar.google.com/citations?user=gUUTqicAAAAJ&hl=en).
 
 <!--
 #{% include base_path %}
