@@ -65,7 +65,7 @@ $$
     dX(t) &= - X(t) \, dt + \sigma(t) \, d B(t)
 \end{align}
 $$
-We denote the solution to this SDE as $( X(t) )_{t=0}^T$ (suppressing the $P$ subscript for notational convenience). Notice that it is easy to produce samples from $X(t)$ via
+We denote the solution to this SDE as $( X(t) )$ (suppressing the $P$ subscript for notational convenience). Notice that it is easy to produce samples from $X(t)$ via
 $$
 \begin{align}
     X(t) \sim \exp(-t) X_0 +  \sqrt{\Sigma(t)} \epsilon
