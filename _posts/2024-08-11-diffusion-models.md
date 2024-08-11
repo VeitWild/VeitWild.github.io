@@ -8,6 +8,11 @@ tags:
   - category2
 ---
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 Generative Diffusion Processes
 ==============================
 
@@ -28,7 +33,7 @@ $$
   dX(t) &= - X(t) \, dt + \sigma(t) \, d B(t),
 \end{align}
 $$
-where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $ \big( B(t)\big)_{t \ge 0}$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
+where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $ \big( B(t) \big)_{t \ge 0}$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
 $$
 \begin{align}
     X_{x_0}(t) \sim \mathcal{N}\big( m(t), \Sigma(t) I_D \big) 
