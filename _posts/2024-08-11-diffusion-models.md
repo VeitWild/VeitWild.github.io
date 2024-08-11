@@ -33,10 +33,10 @@ $$
   dX(t) &= - X(t) \, dt + \sigma(t) \, d B(t),
 \end{align}
 $$
-where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $(B(t))$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
+where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $\big(B(t)\big)$ a Brownian motion. This SDE is amongst the easiest one will ever encounter. The drift term is linear in the space-variable $X(t)$ and the diffusion coefficient does not depend on $X(t)$. It is therefore a special case of a linear SDE and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form 
 $$
 \begin{align}
-    X_{x_0}(t) \sim \mathcal{N} ( m(t), \Sigma(t) I_D ) 
+    X_{x_0}(t) \sim \mathcal{N} \big( m(t), \Sigma(t) I_D \big) 
 \end{align}    
 $$ 
 where 
@@ -48,7 +48,7 @@ $$
 $$
 We can use this fact and generate noisy versions of our samples $X_n$ via (1) by setting $x_0 = X_n$ as long as we have acces to $\Sigma(t)$ (which we usually do by chosing $\sigma(t)$ appropriately). Notice, in particular that we can generate such a sample for any $t>0$ without having to use an Euler-Maruyama discretization of the SDE. This avoids expensive recursive function evaluations that for more general SDEs (where we do not have closed form solutions) would be necessary. 
 
-The diffusion coefficient $\sigma(t)$ determines the noise schedule and is part the model architecture. Typically, we want to add small amounts of noise in the beginnning and as $t$  gets larger increase $\sigma(t)$. We will see later why this is the case. For now it's sufficient to know that succesfull schedulers are well-established in the literatur XXX and we dont need to learn $\sigma(t)$ from data.
+The diffusion coefficient $\sigma(t)$ determines the noise schedule and is part the model architecture. Typically, we want to add small amounts of noise in the beginnning and increase $\sigma(t)$ for larger $t$. We will see later why this is the case. For now it's sufficient to know that succesfull schedulers are well-established in the literatur [1] and we dont need to learn $\sigma(t)$ from data.
 
 Another crucial point to notice is that we can infer the long term behaviour of the SDE from (1). Specifically since $m(t) \to 0$ as $t \to \infty$ (exponentially fast), we find that 
 $$
@@ -84,30 +84,37 @@ where $p_t$ and $p_t(\cdot|x_0)$ denote the Lebesgue densities of $P(t)$ and $P(
 The time reversal
 -----------------
 
-So far we have only learned how we can morph an inital data distribution $P$ over time into a zero-mean Gaussian with known variance $\Sigma(t)$. The more interesting case is to reverse this process, i.e. how to go from Gaussian noise to a data sample.
+So far we have only learned how we can morph an inital data distribution $P$ over time into a zero-mean Gaussian with known variance $\Sigma(t)$. The more interesting case is to reverse this process. We want to turn Gaussian noise into a sample from $P$.
 
-To this end we consider the SDE with random initial condition $P_T$ given as
+To this end, consider the SDE with random initial condition $P(T)$ given as
 $$
 \begin{align}
     & \widehat{X}(0) \sim P(T) \\
     &d \widehat{X}(t) =  \big[ \widehat{X}(t) + \sigma^2(T-t) s\big( T-t, \widehat{X}(t) \big)  \big] dt + \sigma(T-t) \, d \widehat{B}(t), 
 \end{align}
 $$
-where $s(t,x) :=  \nabla \log p_t(x), \, t \in [0,T],  \, x \in \mathbb{R}^D$, is the score function of the distribution $P_t$. Anderson (1982) show that the solution to this SDE, denoted as $\big(\widehat{X}(t)\big)$, has marginals $Q(t):=\text{Law}[\widehat{X}(t)]$ with  
+where $s(t,x) :=  \nabla \log p_t(x), \, t \in [0,T],  \, x \in \mathbb{R}^D$, is the score function of the distribution $P_t$. The solution to this SDE, denoted as $\big(\widehat{X}(t)\big)$, has marginals $Q(t):=\text{Law}[\widehat{X}(t)]$ with  
 $$
 \begin{align}
 Q(t) = P(T-t).
 \end{align}
 $$
-for all $t \in [0,T]$. In particular, the marginal $Q(T)$ coincides with the data distribution $P(0)=P$.
+for all $t \in [0,T]$ (cf. [2]). In particular, the marginal distribution $Q(T)$ coincides with the data distribution $P(0)=P$.
 
-In principle, we can therefore produce samples from $P$ by forward simulation of the reverse SDE (the standard approach would be to use an Euler-Maruyama). However, we run into two problems:
-- We don't know the random initilisaion $P(T)$. Fortunately, this can be remedied quite easily. As discussed in the previous section $P(t) \to \mathcal{N}(0, \Sigma(t))$ exponentially fast. Our first approximation will therefore be to initialise the forward simulation with $\mathcal{N}(0, \Sigma(T))$. This approximation will be extremely good as long as $T$ is large enough.
-- The bigger concern is that we don't have access to the score function $s_t$. We have seen in the previous section, that $p_t$ this is intractable, since can not mariginale over $P$ in (10). Consquently, we can not calculate the gradient of $\log p_t$ to obtain the score function.
+In principle, we can therefore produce samples from $P$ by forward simulation of the reverse SDE (the standard approach would be to use an Euler-Maruyama discretization of the SDE). However, we run into two problems:
+- We don't know the random initilisaion $P(T)$. 
+- The bigger concern is that we don't have access to the score function $s_t$. We have seen in the previous section, that $p_t$ this is intractable, since can not mariginale over $P$ in (10). Consquently, we can not calculate the gradient of $\log p_t$ to obtain the score function. 
+
+Fortunately, the first problem is not a big concern. As discussed in the previous section $P(t) \to \mathcal{N}(0, \Sigma(t))$ exponentially fast. Our first approximation will therefore be to initialize the forward simulation with $\mathcal{N}(0, \Sigma(T))$ instaed of $P(T)$. This approximation will be extremely good as long as $T$ is large enough.
+
+The second problem is a bit more challenging. However, we can replace $s(t,x)$ in with a parametrised model $s_{\theta}(t,x)$ and try to learn the score function from the data. We are therefore in need of a differentiable loss function that can be used to find a paramter vector $\theta$ such that $s_\theta(t,x) \approx s(t,x)$.
+
 
 
 
 
 References:
 
-[1] Anderson, B.D., 1982. Reverse-time diffusion equation models. Stochastic Processes and their Applications, 12(3), pp.313-326.
+[1] Lim, Jae Hyun, Nikola B. Kovachki, Ricardo Baptista, Christopher Beckham, Kamyar Azizzadenesheli, Jean Kossaifi, Vikram Voleti et al. "Score-based diffusion models in function space." arXiv preprint arXiv:2302.07400 (2023).
+
+[2] Anderson, B.D., 1982. Reverse-time diffusion equation models. Stochastic Processes and their Applications, 12(3), pp.313-326.
