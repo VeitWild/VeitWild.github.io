@@ -158,7 +158,6 @@ $$
 $$
 where $Z_n(t_i) \sim \mathcal{N}(0,I_D)$ independently for $n=1,\dots,N$ and $i=1,\dots,I$.
 
-Notice that 
 
 
 
