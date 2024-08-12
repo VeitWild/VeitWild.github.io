@@ -50,7 +50,7 @@ $$
 $$
 We can leverage this fact to generate noisy versions of our samples $X_n$ by using (1) with the initial condition $x_0 = X_n$, provided we have access to $\Sigma(t)$ (which is usually available by choosing $\sigma(t)$ appropriately). Importantly, we can generate such a sample for any $ t > 0 $ without relying on an Euler-Maruyama discretization of the SDE. This approach avoids the need for expensive recursive function evaluations that would be necessary for more general SDEs, where closed-form solutions are not available.
 
-The diffusion coefficient $\sigma(t)$ determines the noise schedule and is part of the model architecture. Typically, we aim to add small amounts of noise at the beginning and increase $\sigma(t)$ as $t$ grows. We will explore the reasons for this approach later. For now, it is sufficient to know that successful schedulers are well-established in the literature [literatur](https://arxiv.org/abs/2011.13456) and that we do not need to learn $\sigma(t)$ from data.
+The diffusion coefficient $\sigma(t)$ determines the noise schedule and is part of the model architecture. Typically, we aim to add small amounts of noise at the beginning and increase $\sigma(t)$ as $t$ grows. We will explore the reasons for this approach later. For now, it is sufficient to know that successful schedulers are well-established in the [literatur](https://arxiv.org/abs/2011.13456) and that we do not need to learn $\sigma(t)$ from data.
 
 Another crucial point to note is that we can infer the long-term behavior of the SDE from (1). Specifically, since $m(t) \to 0$ as $t \to \infty$ (exponentially fast), we find that
 $$
@@ -115,7 +115,7 @@ A differentiable loss for score matching
 
 Let $\big(\hat{X_\theta}(t)\big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$, for a fixed $\theta \in \Theta$ and random initialization $\mathcal{N}(0, \Sigma(T))$.
 
-Our goal is to choose a $\theta$ such that the sample paths of $\big(\hat{X_\theta} (t)\big)$ closely match those of $\big(\widehat{X}(t)\big)$. Mathematically, this can be formalized by stating that the path measures $\mathbf{P}$ and $\mathbf{Q_\theta}$, which represent the probability measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\hat{X}_\theta(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D\big)$, respectively, should be close to each other, i.e., $\mathbf{Q}_\theta \approx \mathbf{P}$. The closeness between two probability measures can be assessed using a metric or divergence, and the training process aims to improve this measure of closeness between $\mathbf{P}$ and $\mathbf{Q_\theta}$. 
+Our goal is to choose a $\theta$ such that the sample paths of $\big(\hat{X_\theta} (t)\big)$ closely match those of $\big(\widehat{X}(t)\big)$. Mathematically, this can be formalized by stating that the path measures $\mathbf{P}$ and $\mathbf{Q_\theta}$, which represent the probability measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\hat{X_\theta}(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D\big)$, respectively, should be close to each other, i.e., $\mathbf{Q_\theta} \approx \mathbf{P}$. The closeness between two probability measures can be assessed using a metric or divergence, and the training process aims to improve this measure of closeness between $\mathbf{P}$ and $\mathbf{Q_\theta}$. 
 
 Typically, finding a measure of closeness that results in a tractable objective is challenging. However, in our special case, an application of [Girsanov's theorem](https://arxiv.org/pdf/2209.11215) allows us to derive the Kullback-Leibler (KL) divergence between the path measures:
 $$
@@ -160,4 +160,4 @@ where $Z_n(t_i) \sim \mathcal{N}(0, I_D)$ are independent for $n = 1, \dots, N$ 
 
 In most cases, it is too expensive to compute the double sum in Equation (22), which is why mini-batches are commonly used for both the time and space variables.
 
-After successful training, we can use the obtained minimizer to generate a sample trajectory of $\big(\hat{X_\theta}(t)\big)$ (e.g. via an Euler-Maruyama discretization of (12)). If all goes well, we will have $\hat{X_\theta}(T) \approx P$ and achieve our goal of generating a new sample.
+After successful training, we can use the obtained minimizer to generate a sample trajectory of $\big(\hat{X_\theta}(t)\big)$ (e.g. via an Euler-Maruyama discretization). If all goes well, we will have $\hat{X_\theta}(T) \approx P$ and therefore achieved our goal of generating a new sample.
