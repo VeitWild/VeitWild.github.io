@@ -8,9 +8,16 @@ tags:
   - category2
 ---
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/latest/MathJax.js">
+MathJax.Hub.Config({
+ extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+ jax: ["input/TeX", "output/HTML-CSS"],
+ tex2jax: {
+     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+     displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+ },
+ "HTML-CSS": { availableFonts: ["TeX"] }
+});
 </script>
 
 Generative Diffusion Processes
