@@ -8,18 +8,6 @@ tags:
   - category2
 ---
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/latest/MathJax.js">
-MathJax.Hub.Config({
- extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
- jax: ["input/TeX", "output/HTML-CSS"],
- tex2jax: {
-     inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-     displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
- },
- "HTML-CSS": { availableFonts: ["TeX"] }
-});
-</script>
-
 Generative Diffusion Processes
 ==============================
 
