@@ -112,7 +112,7 @@ The second problem is a bit more challenging. However, we can replace $s(t,x)$ i
 
 A differentiable loss for score matching
 ----------------------------------------
-Let $\hat{X}_\theta$ and  $\big(\widehat{X}_{\theta} (t) \big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$ for fixed $\theta \in \Theta$ and random initilisation $\mathcal{N}(0, \Sigma(T))$.
+Let $\widehat{X} {}_\theta$ and  $\big(\widehat{X}_{\theta} (t) \big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$ for fixed $\theta \in \Theta$ and random initilisation $\mathcal{N}(0, \Sigma(T))$.
 
 Our goal is to choose a $\theta$ such that the sample paths of $\big(\widehat{X}_\theta(t)\big)$ coincide with $\big(\widehat{X}(t)\big)$. Mathematically, this means that $\mathbf{P}, \mathbf{Q}_\theta \in \mathcal{P}\Big( C\big([0,T],\mathbb{R}^D\big) \Big)$ which we define as the path measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\widehat{X}_\theta(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D \big)$ are required to be close to each other $ \mathbf{Q}_\theta \approx \mathbf{P}$.
 
