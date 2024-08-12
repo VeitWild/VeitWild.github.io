@@ -16,11 +16,12 @@ tags:
 Generative Diffusion Processes
 ==============================
 
-Let $X_1, \dots, X_N \sim P$ be a sample of size $N \in \mathbb{N}$ from an unknown data distribution $P \in \mathcal{P}(\mathbb{R}^D)$. 
+Let $X_1, \dots, X_N \sim P$ be a sample of size $N \in \mathbb{N}$ drawn from an unknown data distribution $P \in \mathcal{P}(\mathbb{R}^D)$. 
 
-Our goal is to generate a new sample $X^*$ which looks indistinguishable from $X_1, \dots, X_N$. The paradigmatic case is image generation, where a dataset with images is given and we want to build a sampler generating a new image from the unknown image data distribution.
+Our goal is to generate a new sample $X^*$ that is indistinguishable from the original samples $X_1, \dots, X_N$. A classic example of this is image generation, where the task is to build a sampler that can generate new images from the unknown data distribution of a given image dataset.
 
-Diffusion models (DM) allow us to progressively morph samples from a Gaussian distribution into the often highly complex and multimodal data distribution $P$. The mathematics behind diffusion models are stunningly beatiful and to my eye the most fascinating application of stochastic calculus in a long time. This blog post will focus on conceptual ideas behind DM and maybe provide some mathematical intution for why they are so succesful.
+Diffusion models (DMs) provide a powerful framework for progressively transforming samples from a simple Gaussian distribution into the often highly complex and multimodal data distribution $ P $. The mathematics behind diffusion models are remarkably beautiful and represent, in my view, one of the most fascinating applications of stochastic calculus in recent times. This blog post will focus on the conceptual ideas underlying DMs and offer some mathematical intuition for their success.
+
 
 
 The forward process
@@ -93,21 +94,74 @@ $$
     &d \widehat{X}(t) =  \big[ \widehat{X}(t) + \sigma^2(T-t) s\big( T-t, \widehat{X}(t) \big)  \big] dt + \sigma(T-t) \, d \widehat{B}(t), 
 \end{align}
 $$
-where $s(t,x) :=  \nabla \log p_t(x), \, t \in [0,T],  \, x \in \mathbb{R}^D$, is the score function of the distribution $P_t$. The solution to this SDE, denoted as $\big(\widehat{X}(t)\big)$, has marginals $Q(t):=\text{Law}[\widehat{X}(t)]$ with  
+where $s(t,x) :=  \nabla \log p_t(x), \, t \in [0,T],  \, x \in \mathbb{R}^D$, is the score function of the distribution $P_t$. The solution to this SDE (cf. [2]), denoted as $\big(\widehat{X}(t)\big)$, has marginals $Q(t):=\text{Law}[\widehat{X}(t)]$ with  
 $$
 \begin{align}
 Q(t) = P(T-t).
 \end{align}
 $$
-for all $t \in [0,T]$ (cf. [2]). In particular, the marginal distribution $Q(T)$ coincides with the data distribution $P(0)=P$.
+for all $t \in [0,T]$. In particular, the marginal distribution $Q(T)$ coincides with the data distribution $P(0)=P$.
 
 In principle, we can therefore produce samples from $P$ by forward simulation of the reverse SDE (the standard approach would be to use an Euler-Maruyama discretization of the SDE). However, we run into two problems:
 - We don't know the random initilisaion $P(T)$. 
 - The bigger concern is that we don't have access to the score function $s_t$. We have seen in the previous section, that $p_t$ this is intractable, since can not mariginale over $P$ in (10). Consquently, we can not calculate the gradient of $\log p_t$ to obtain the score function. 
 
-Fortunately, the first problem is not a big concern. As discussed in the previous section $P(t) \to \mathcal{N}(0, \Sigma(t))$ exponentially fast. Our first approximation will therefore be to initialize the forward simulation with $\mathcal{N}(0, \Sigma(T))$ instaed of $P(T)$. This approximation will be extremely good as long as $T$ is large enough.
+Fortunately, the first problem is not a big concern. We already established in the previous section that $P(t) \to \mathcal{N}(0, \Sigma(t))$ exponentially fast. Our first approximation will therefore be to initialize the forward simulation with $\mathcal{N}(0, \Sigma(T))$ instaed of $P(T)$. This approximation will be extremely good as long as $T$ is large enough.
 
 The second problem is a bit more challenging. However, we can replace $s(t,x)$ in with a parametrised model $s_{\theta}(t,x)$ and try to learn the score function from the data. We are therefore in need of a differentiable loss function that can be used to find a paramter vector $\theta$ such that $s_\theta(t,x) \approx s(t,x)$.
+
+A differentiable loss for score matching
+----------------------------------------
+Let $\big(\widehat{X}_\theta(t)\big)$ be the solution to the SDE \eqref{eq:SDE_time_reversal} with $s$ replaced by $s_\theta$ for fixed $\theta \in \Theta$ and random initilisation $\mathcal{N}(0, \Sigma(T))$.
+
+Our goal is to choose a $\theta$ such that the sample paths of $\big(\widehat{X}_\theta(t)\big)$ coincide with $\big(\widehat{X}(t)\big)$. Mathematically, this means that $\mathbf{P}, \mathbf{Q}_\theta \in \mathcal{P}\Big( C\big([0,T],\mathbb{R}^D\big) \Big)$ which we define as the path measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\widehat{X}_\theta(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D \big)$ are required to be close to each other $ \mathbf{Q}_\theta \approx \mathbf{P}$.
+
+Perhaps surprisingly, an application of Girsanov's theorem allows us to derive the Kullback-Leibler (KL) divergence between the path measures:
+$$
+\begin{align}
+    \ell(\theta) &:= 2 \cdot \text{KL}( \mathbf{P}, \mathbf{Q}_\theta) \\
+                 & = -  \int_{0}^T \sigma^2(T-t) \mathbb{E} \Big[ \| s\big(T-t,\widehat{X}(t)\big) - s_{\theta}\big(T-t,\widehat{X}(t)\big) \|^2 \Big] \, dt + \text{ const.} \\
+                 &=   \int_{0}^T \sigma^2(t) \mathbb{E} \Big[ \| s\big(t,X(t)\big) - s_{\theta}\big(t,X(t)\big) \|^2 \Big] \, dt + \text{ const. } 
+\end{align}
+$$
+There are now several ways to generate unbiased estimators of $\ell$: [Standard score-matching](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf) (very expensive), [sliced score matching](https://arxiv.org/pdf/1905.07088) (cheap but high variance) and [denoising score matching](https://jmlr.org/papers/volume6/hyvarinen05a/hyvarinen05a.pdf) (cheap and lower variance). The latter is by far the most common and looks a bit like magic initially. We introduce the key lemma first.
+
+### Lemma. 
+Let $Y$ be an arbitrary random variable. Define $\widetilde{Y}:= Y + \xi$ where $\xi \sim \mathcal{N}(0,\Sigma)$ and let further $\widetilde{s}$ be the score function of $\widetilde{Y}$. Then
+    $$
+    \begin{align}
+        \mathbb{E} \left[ \| h(\widetilde{Y}) - \widetilde{s}(\widetilde{Y}) \|_2^2 \right] = \mathbb{E} \left[ \| h(\widetilde{Y}) - \Sigma^{-1}(Y-\widetilde{Y}) \|_2^2 \right]
+    \end{align}
+    $$
+holds for arbitrary $h: \mathbb{R}^D \to \mathbb{R}^D$.
+
+
+Notice that the LHS of (17) requires us to know the analytical form of the score-function $\widehat{s}$ whereas the RHS of (17) can easily be approximated by jointly sampling $(Y,\widetilde{Y})$ as long as $h$ is known. We apply this Lemma to \eqref{eq:diffusion_loss} for each fixed $t \in [0,T]$. Recall that
+$$ 
+\begin{equation}
+    X(t) \sim e^{-t} X_0 + \xi
+\end{equation}
+$$
+where $\xi \sim \mathcal{N}\big(0,\Sigma(t)\big)$ and we therefore apply the Lemma with $Y:=e^{-t} X_0$, $\Sigma:=\Sigma(t)$ and $h= s(t, \cdot)$ which results in
+$$ 
+\begin{align}
+    \ell(\theta) &= \int_0^T \sigma^2(t) \mathbb{E}  \left[ \| s_{\theta}\big(t, X(t) \big) - \Sigma(t)^{-1} \big( X(t) - e^{-t} X_0 \big) \|^2 \right] dt \\
+    &= \int_0^T \sigma^2(t) \mathbb{E}  \left[ \| s_{\theta}\Big(t, e^{-t} X_0 + \sqrt{\Sigma(t)} Z(t) \Big) - \Sigma(t)^{-1/2} Z(t) \|^2 \right] dt \\
+    &\approx \sum_{i=1}^I \sigma^2(t_i) \mathbb{E}  \left[ \| s_{\theta}\Big(t_i, e^{-t_i} X_0 + \sqrt{\Sigma(t_i)} Z(t_i) \Big) - \Sigma(t_i)^{-1/2} Z(t_i) \|^2 \right] (t_i - t_{i-1})
+\end{align}
+$$
+where $0=t_0  < t_1 < \dots < t_I = T$ is a partition of $[0,T]$ and $Z(t)$ is a white noise Gaussian process. The expected value is now replaced by the MC-estimator and we obtain the final tractable objective
+$$
+\begin{align}
+    \ell(\theta)= \frac{1}{N}\sum_{i=1}^I  \sum_{n=1}^N \sigma^2(t_i) (t_i - t_{i-1}) \| s_{\theta}\Big(t_i, e^{-t_i} X_{n} + \sqrt{\Sigma(t_i)} Z_n(t_i) \Big) - \Sigma(t_i)^{-1/2} Z_n(t_i) \|^2,  
+\end{align}
+$$
+where $Z_n(t_i) \sim \mathcal{N}(0,I_D)$ independently for $n=1,\dots,N$ and $i=1,\dots,I$.
+
+Notice that 
+
+
+
 
 
 
