@@ -93,7 +93,7 @@ $$
     & d \widehat{X}(t) = \left[ \widehat{X}(t) + \sigma^2(T-t) s\big(T-t, \widehat{X}(t)\big) \right] dt + \sigma(T-t) \, d \widehat{B}(t),
 \end{align}
 $$
-where $s(t, x) := \nabla \log p_t(x)$ for $t \in [0, T]$ and $x \in \mathbb{R}^D$ is the score function of the distribution $P_t$. [Anderson(1982)](https://www.sciencedirect.com/science/article/pii/0304414982900515) show that the solution to this SDE, denoted as $(\widehat{X}(t))$, has marginals $Q(t) := \text{Law}[\widehat{X}(t)]$ with
+where $s(t, x) := \nabla \log p_t(x)$ for $t \in [0, T]$ and $x \in \mathbb{R}^D$ is the score function of the distribution $P_t$. [Anderson (1982)](https://www.sciencedirect.com/science/article/pii/0304414982900515) show that the solution to this SDE, denoted as $(\widehat{X}(t))$, has marginals $Q(t) := \text{Law}[\widehat{X}(t)]$ with
 $$
 \begin{align}
     Q(t) = P(T-t)
