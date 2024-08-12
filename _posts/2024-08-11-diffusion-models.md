@@ -114,9 +114,7 @@ A differentiable loss for score matching
 ----------------------------------------
 Let $\hat{X_\theta}$ and  $\big( \hat{X_\theta} (t) \big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$ for fixed $\theta \in \Theta$ and random initilisation $\mathcal{N}(0, \Sigma(T))$.
 
-Our goal is to choose a $\theta$ such that the sample paths of $\big(\widehat{X}_\theta(t)\big)$ coincide with $\big(\widehat{X}(t)\big)$. Mathematically, this means that $\mathbf{P}, \mathbf{Q}_\theta \in \mathcal{P}\Big( C\big([0,T],\mathbb{R}^D\big) \Big)$ which we define as the path measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\widehat{X}_\theta(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D \big)$ are required to be close to each other $ \mathbf{Q}_\theta \approx \mathbf{P}$.
-
-Perhaps surprisingly, an application of Girsanov's theorem allows us to derive the Kullback-Leibler (KL) divergence between the path measures:
+Our goal is to choose a $\theta$ such that the sample paths of $\big(\hat{X_\theta}(t)\big)$ coincide with $\big(\widehat{X}(t)\big)$. Mathematically, this means that $\mathbf{P}$ and $ \mathbf{Q}_\theta \in \mathcal{P}\Big( C\big([0,T],\mathbb{R}^D\big) \Big)$ which we define as the path measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\widehat{X}_\theta(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D \big)$ are required to be close to each other $ \mathbf{Q}_\theta \approx \mathbf{P}$. The closeness between two probability measures can be assessed by means of a metric or divergence and so training can be based on improving some measure of clossness between $\mathbf{P}$ and $\mathbf{Q}_\theta$. Typically, it is extremely hard to find such a measure of closeness that leads to a tractable objective, but in our special case an application of Girsanov's theorem allows us to derive the Kullback-Leibler (KL) divergence between the path measures:
 $$
 \begin{align}
     \ell(\theta) &:= 2 \cdot \text{KL}( \mathbf{P}, \mathbf{Q}_\theta) \\
@@ -136,7 +134,7 @@ Let $Y$ be an arbitrary random variable. Define $\widetilde{Y}:= Y + \xi$ where 
 holds for arbitrary $h: \mathbb{R}^D \to \mathbb{R}^D$.
 
 
-Notice that the LHS of (17) requires us to know the analytical form of the score-function $\widehat{s}$ whereas the RHS of (17) can easily be approximated by jointly sampling $(Y,\widetilde{Y})$ as long as $h$ is known. We apply this Lemma to \eqref{eq:diffusion_loss} for each fixed $t \in [0,T]$. Recall that
+Notice that the LHS of (17) requires us to know the analytical form of the score-function $\widehat{s}$ whereas the RHS of (17) can easily be approximated by jointly sampling $(Y,\widetilde{Y})$ as long as $h$ is known. We apply this Lemma for each fixed $t \in [0,T]$. Recall that
 $$ 
 \begin{equation}
     X(t) \sim e^{-t} X_0 + \xi
