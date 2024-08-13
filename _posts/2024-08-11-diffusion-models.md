@@ -134,7 +134,7 @@ Typically, finding a measure of closeness that results in a tractable objective 
 
 $$
 \begin{align}
-    \ell(\theta) &:= 2 \cdot \text{KL}(\mathbf{Q}, \mathbf{Q}_\theta) \\
+    \ell(\theta) &:= 2 \cdot \text{KL}(\mathbf{Q}, \mathbf{Q_\theta)} \\
                  &= - \int_{0}^T \sigma^2(T-t) \mathbb{E} \left[ \| s\big(T-t, \widehat{X}(t)\big) - s_\theta\big(T-t, \widehat{X}(t)\big) \|^2 \right] \, dt + \text{const.} \\
                  &= \int_{0}^T \sigma^2(t) \mathbb{E} \left[ \| s\big(t, X(t)\big) - s_\theta\big(t, X(t)\big) \|^2 \right] \, dt + \text{const.}
 \end{align}
