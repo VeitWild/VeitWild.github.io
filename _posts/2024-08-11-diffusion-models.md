@@ -80,7 +80,7 @@ $$
 \end{align}
 $$
 
-where $\epsilon \sim \mathcal{N}(0,I_D)$ and $X_0 \sim P$. However, we do not have a closed-form expression for its Lebesgue density $p_t$. More formally, we define $P(t) := \text{Law} [ X(t) ]$ and $P(t|x_0) := \text{Law} [ X_{x_0}(t) ]$, and note that
+where $\epsilon \sim \mathcal{N}(0,I_D)$ and $X_0 \sim P$.  However, we do not have a closed-form expression for its Lebesgue density $p_t$. More formally, we define $P(t) := \text{Law} [ X(t) ]$ and $P(t \mid x_0) := \text{Law} [ X_{x_0}(t)]$, and note that
 
 $$
 \begin{align}
