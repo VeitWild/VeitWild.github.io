@@ -84,7 +84,7 @@ where $\epsilon \sim \mathcal{N}(0,I_D)$ and $X_0 \sim P$.  However, we do not h
 
 $$
 \begin{align}
-    p_t(x) = \int p_t(x|x_0) \, dP(x_0)
+    p_t(x) = \int p_t(x \mid x_0) \, dP(x_0)
 \end{align}
 $$
 
