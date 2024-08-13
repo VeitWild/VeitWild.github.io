@@ -45,7 +45,7 @@ $$
 $$
 We can leverage this fact to generate noisy versions of our samples $X_n$ by using (1) with the initial condition $x_0 = X_n$, provided we have access to $m(t)$ and $\Sigma(t)$ which we can ensure by choosing $\alpha(t)$ and $\sigma(t)$ appropriately.
 
-(which is usually available by choosing $\sigma(t)$ appropriately). Importantly, we can generate such a sample for any $ t > 0 $ without relying on an Euler-Maruyama discretization of the SDE. This approach avoids the need for expensive recursive function evaluations that would be necessary for more general SDEs, where closed-form solutions are not available.
+Importantly, we can generate such a sample for any $ t > 0 $ without relying on an Euler-Maruyama discretization of the SDE. This approach avoids the need for expensive recursive function evaluations that would be necessary for more general SDEs, where closed-form solutions are not available.
 
 The shrinkage factor $\alpha(t)$ and the diffusion coefficient $\sigma(t)$ are part of the model architecture. Typically, we aim to shrink only a little and add small amounts of noise at the beginning and increase $\alpha(t)$ and $\sigma(t)$ as $t$ grows. We will explore the reasons for this approach later. For now, it is sufficient to know that successful schedulers are well-established in the [literatur](https://arxiv.org/abs/2011.13456) and that we do not need to learn $\alpha(t)$ and $\sigma(t)$ from data.
 
@@ -135,9 +135,9 @@ holds for arbitrary $h: \mathbb{R}^D \to \mathbb{R}^D$.*
 
 Notice that the left-hand side of (17) requires the analytical form of the score function $\widetilde{s}$, whereas the right-hand side can be easily approximated by jointly sampling $(Y, \xi)$, as long as $h$ is known. In our case, we can apply the lemma for fixed $t \in [0,T]$ with $Y :=   \exp \big(-\int_0^t \alpha(\tau) d\tau \big) X_0$, $\Sigma := \Sigma(t)$, and $h = s(t, \cdot)$, since we know that
 $$
-\begin{equation}
+\begin{align}
     X(t)  \sim \exp \big(-\int_0^t \alpha(\tau) d\tau \big) X_0+ \sqrt{\Sigma(t)} \xi =: Y(t) +  \sqrt{\Sigma(t)} \xi
-\end{equation}
+\end{align}
 $$
 where $\xi \sim \mathcal{N}(0, I_D)$. This results in
 $$
@@ -154,6 +154,6 @@ $$
 $$
 where $\xi_n(t_i) \sim \mathcal{N}(0, I_D)$ are independent for $n = 1, \dots, N$ and $i = 1, \dots, I$.
 
-In most cases, it is too expensive to compute the double sum in Equation (22), which is why we typically sample a random time point $i\sim U(\{1,\dots,I\})$ and then a mini-batch from $\{X_n, \mid n=1,\dots, N\}$ for each gradient update.
+In most cases, it is too expensive to compute the double sum in Equation (22), which is why we typically sample a random time point $i\sim U({1,\dots,I})$ and then a mini-batch from $(X_n \mid n=1,\dots, N)$ for each gradient update.
 
 After successful training, we can use the obtained minimizer to generate a sample trajectory of $\big(\hat{X_\theta}(t)\big)$ (e.g. via an Euler-Maruyama discretization). If all goes well, we will have $\hat{X_\theta}(T) \approx P$ and therefore achieved our goal of generating a new sample.
