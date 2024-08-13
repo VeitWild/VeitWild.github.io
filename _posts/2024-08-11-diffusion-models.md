@@ -23,13 +23,12 @@ The forward process
 -----------------------------------------
 
 Let’s begin with the straightforward task. Our objective is to gradually transform the samples $ X_1, \dots, X_N $ into Gaussian noise. To achieve this, we consider a very simple Stochastic Differential Equation (SDE) described as
-
-$
+$$
 \begin{align}
   X(0) &= x_0 \\
   dX(t) &= - \alpha(t) X(t) \, dt + \sigma(t) \, d B(t),
 \end{align}
-$
+$$
 
 where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\alpha:[0,T] \to (0,\infty)$ is the shrinkage factor, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $\big(B(t)\big)$ a Brownian motion. This SDE is one of the simplest to encounter.
 The drift term is linear in the space variable $X(t)$, and the diffusion coefficient is independent of $X(t)$. Consequently, it represents a special case of a linear SDE, and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form. Specifically, the marginal law for fixed $t$ is given as
