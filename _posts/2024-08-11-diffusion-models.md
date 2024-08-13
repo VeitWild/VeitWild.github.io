@@ -133,7 +133,7 @@ The second problem is more challenging but not insurmountable. We can address it
 A differentiable loss for score matching
 ----------------------------------------
 
-Let $\big(\hat{X_\theta}(t)\big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$, for a fixed $\theta \in \Theta$ and random initialization $\mathcal{N}(0, \Sigma(T))$.
+Let $\big(\hat{X_\theta}(t)\big)$ be the solution to the SDE (12) with $s$ replaced by $s_\theta$, for a fixed $\theta$ and random initialization $\mathcal{N}(0, \Sigma(T))$.
 
 Our goal is to choose a $\theta$ such that the sample paths of $\big(\hat{X_\theta} (t)\big)$ closely match those of $\big(\widehat{X}(t)\big)$. Mathematically, this can be formalized by stating that the path measures $\mathbf{Q}$ and $\mathbf{Q_\theta}$, which represent the probability measures associated with $\big(\widehat{X}(t)\big)$ and $\big(\hat{X_\theta}(t)\big)$ on the space of continuous paths $C\big([0,T],\mathbb{R}^D\big)$, respectively, should be close to each other, i.e., $\mathbf{Q_\theta} \approx \mathbf{Q}$. The closeness between two probability measures can be assessed using a metric or divergence, and the training process aims to improve this measure of closeness between $\mathbf{Q}$ and $\mathbf{Q_\theta}$. 
 
