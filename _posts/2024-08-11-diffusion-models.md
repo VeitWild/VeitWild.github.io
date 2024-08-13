@@ -22,7 +22,7 @@ Diffusion models (DMs) provide a powerful framework for progressively transformi
 The forward process
 -----------------------------------------
 
-Let’s begin with the straightforward task. Our objective is to gradually transform the samples $ X_1, \dots, X_N $ into Gaussian noise. To achieve this, we consider a very simple Stochastic Differential Equation (SDE) described as
+Let’s begin with the straightforward task. Our objective is to gradually transform the samples $ X_1, \dots, X_N $ into Gaussian noise. To achieve this, we consider a very simple Stochastic Differential Equation (SDE) described as <br />
 $$
 \begin{align}
   X(0) &= x_0 \\
