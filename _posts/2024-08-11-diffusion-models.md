@@ -180,4 +180,4 @@ where $\xi_n(t_i) \sim \mathcal{N}(0, I_D)$ are independent for $n = 1, \dots, N
 
 In most cases, it is too expensive to compute the double sum in Equation (22), which is why we typically sample a random time point $i\sim U({1,\dots,I})$ and then a mini-batch from $(X_n \mid n=1,\dots, N)$ for each gradient update.
 
-After successful training, we can use the obtained minimizer to generate a sample trajectory of $\big(\hat{X_\theta}(t)\big)$ (e.g. via an Euler-Maruyama discretization). If all goes well, we will have $\hat{X_\theta}(T) \approx P$ and therefore achieved our goal of generating a new sample.
+After successful training, we can use the obtained minimizer to generate a sample trajectory of $\big(\hat{X_\theta}(t)\big)$ (e.g. via an Euler-Maruyama discretization). If all goes well, we will have $\hat{X_\theta}(T) \approx P$ and therefore achieved our goal of generating a new sample!
