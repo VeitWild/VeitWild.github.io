@@ -88,7 +88,7 @@ $$
 \end{align}
 $$
 
-where $p_t$ and $p_t(\cdot|x_0)$ denote the Lebesgue densities of $P(t)$ and $P(t|x_0)$, respectively. Here, $p_t(x|x_0) = \mathcal{N}(x \mid x_0, \Sigma(t))$ is known, but $p_t(x)$ is unknown, since we do not know $P$ and therefore cannot calculate the integral in (10).
+where $p_t$ and $p_t(\cdot \mid x_0)$ denote the Lebesgue densities of $P(t)$ and $P(t \mid x_0)$, respectively. Here, $p_t(x \mid x_0) = \mathcal{N}(x \mid x_0, \Sigma(t))$ is known, but $p_t(x)$ is unknown, since we do not know $P$ and therefore cannot calculate the integral in (10).
 
 
 The time reversal
