@@ -23,14 +23,17 @@ The forward process
 -----------------------------------------
 
 Let’s begin with the straightforward task. Our objective is to gradually transform the samples $ X_1, \dots, X_N $ into Gaussian noise. To achieve this, we consider a very simple Stochastic Differential Equation (SDE) described as
+
 $$
 \begin{align}
   X(0) &= x_0 \\
   dX(t) &= - \alpha(t) X(t) \, dt + \sigma(t) \, d B(t),
 \end{align}
 $$
+
 where $x_0 \in \mathbb{R}^D$ is an arbitrary initial condition, $\alpha:[0,T] \to (0,\infty)$ is the shrinkage factor, $\sigma: [0, T] \to (0, \infty)$ is the diffusion coefficient, $T >0 $ the time-horizon and $\big(B(t)\big)$ a Brownian motion. This SDE is one of the simplest to encounter.
-The drift term is linear in the space variable $X(t)$, and the diffusion coefficient is independent of $X(t)$. Consequently, it represents a special case of a linear SDE, and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form. Speficially, the marginal law for fixed $t$ is given as
+The drift term is linear in the space variable $X(t)$, and the diffusion coefficient is independent of $X(t)$. Consequently, it represents a special case of a linear SDE, and the solution, which we denote as $X_{x_0}(t)$, is readily available in closed form. Specifically, the marginal law for fixed $t$ is given as
+
 $$
 \begin{align}
     X_{x_0}(t) \sim \mathcal{N} \big( m(t), \Sigma(t) I_D \big) 
@@ -43,11 +46,12 @@ $$
     \Sigma(t) &:=  \int_0^t \sigma(\tau)^2 \exp\left(-2\int_\tau^t \alpha(u) \, du \right) \, d\tau.
 \end{align}    
 $$
+
 We can leverage this fact to generate noisy versions of our samples $X_n$ by using (1) with the initial condition $x_0 = X_n$, provided we have access to $m(t)$ and $\Sigma(t)$ which we can ensure by choosing $\alpha(t)$ and $\sigma(t)$ appropriately.
 
 Importantly, we can generate such a sample for any $ t > 0 $ without relying on an Euler-Maruyama discretization of the SDE. This approach avoids the need for expensive recursive function evaluations that would be necessary for more general SDEs, where closed-form solutions are not available.
 
-The shrinkage factor $\alpha(t)$ and the diffusion coefficient $\sigma(t)$ are part of the model architecture. Typically, we aim to shrink only a little and add small amounts of noise at the beginning and increase $\alpha(t)$ and $\sigma(t)$ as $t$ grows. We will explore the reasons for this approach later. For now, it is sufficient to know that successful schedulers are well-established in the [literatur](https://arxiv.org/abs/2011.13456) and that we do not need to learn $\alpha(t)$ and $\sigma(t)$ from data.
+The shrinkage factor $\alpha(t)$ and the diffusion coefficient $\sigma(t)$ are part of the model architecture. Typically, we aim to shrink only a little and add small amounts of noise at the beginning and increase $\alpha(t)$ and $\sigma(t)$ as $t$ grows. We will explore the reasons for this approach later. For now, it is sufficient to know that successful schedulers are well-established in the [literature](https://arxiv.org/abs/2011.13456) and that we do not need to learn $\alpha(t)$ and $\sigma(t)$ from data.
 
 Another crucial point to note is that we can infer the long-term behavior of the SDE from (1). Specifically, since $m(t) \to 0$ as $t \to \infty$ (exponentially fast), we find that
 $$
