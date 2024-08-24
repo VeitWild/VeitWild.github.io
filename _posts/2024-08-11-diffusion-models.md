@@ -154,12 +154,12 @@ Several methods exist for generating unbiased estimators of $\ell$: [Standard sc
 *Let $Y$ be an arbitrary random variable. Define $\widetilde{Y}:= Y + \sqrt{\Sigma} \xi$ where $\xi \sim \mathcal{N}(0,I_D)$ and let further $\widetilde{s}$ be the score function of $\widetilde{Y}$. Then
     $$
     \begin{align}
-        \mathbb{E} \left[ \| h(\widetilde{Y}) - \widetilde{s}(\widetilde{Y}) \|_2^2 \right] = \mathbb{E} \left[ \| h(Y+\xi) - \Sigma^{-1/2} \xi \|_2^2 \right]
+        \mathbb{E} \left[ \| h(\widetilde{Y}) - \widetilde{s}(\widetilde{Y}) \|_2^2 \right] = \mathbb{E} \left[ \| h(Y + \sqrt{\Sigma} \xi) - \Sigma^{-1/2} \xi \|_2^2 \right]
     \end{align}
     $$
 holds for arbitrary $h: \mathbb{R}^D \to \mathbb{R}^D$.*
 
-Notice that the left-hand side of (17) requires the analytical form of the score function $\widetilde{s}$, whereas the right-hand side can be easily approximated by jointly sampling $(Y, \xi)$, as long as $h$ is known. In our case, we can apply the lemma for fixed $t \in [0,T]$ with $Y :=   \exp \big(-\int_0^t \alpha(\tau) d\tau \big) X_0$, $\Sigma := \Sigma(t)$, and $h = s(t, \cdot)$, since we know that
+Notice that the left-hand side of (17) requires the analytical form of the score function $\widetilde{s}$ whereas the right-hand side can be easily approximated by jointly sampling $(Y, \xi)$, as long as $h$ is known. In our case, we can apply the lemma for fixed $t \in [0,T]$ with $Y :=   \exp \big(-\int_0^t \alpha(\tau) d\tau \big) X_0$, $\Sigma := \Sigma(t)$, and $h = s(t, \cdot)$, since we know that
 <br>
 <br>
 $$
