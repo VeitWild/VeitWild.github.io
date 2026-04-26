@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am a Quantitative Researcher at Appian Way Energy Partners, working at the intersection of probability theory, machine learning, and real-world uncertainty quantification.
+I am a Quantitative Researcher at [Appian Way Energy Partners](https://www.appianwayenergy.com/), working at the intersection of probability theory, machine learning, and real-world uncertainty quantification.
 
 My background is in theoretical statistics and probability. I received my PhD in Statistics from the University of Oxford, where I was supervised by [Dino Sejdinovic](https://sejdino.github.io/) and [George Deligiannidis](https://www.stats.ox.ac.uk/~deligian/). During my PhD, I worked on generalised Bayesian methods in function and parameter space, using tools from infinite-dimensional analysis to study uncertainty quantification and develop new machine learning algorithms.
 
