@@ -1,5 +1,5 @@
 ---
-title: 'Flow Matching from First Principles'
+title: 'A Sample Space Perspective on Flow Matching'
 date: 2026-04-26
 permalink: /posts/2026/04/flow-matching-from-first-principles/
 tags:
@@ -8,23 +8,21 @@ tags:
   - optimal transport
 ---
 
-Flow Matching from First Principles
-===================================
+A Sample Space Perspective on Flow Matching
+===========================================
 
 Introduction
 ------------
 
-Flow matching is a powerful and elegant idea, but I often found the standard presentations hard to follow.
+Flow matching, introduced by Lipman et al. in [Flow Matching for Generative Modeling](https://arxiv.org/abs/2210.02747), has become one of the central ideas behind modern flow-based generative models. Closely related rectified-flow methods now appear in large-scale systems such as [Stable Diffusion 3](https://arxiv.org/abs/2403.03206) and [FLUX.1](https://huggingface.co/black-forest-labs/FLUX.1-dev).
 
-Typically, one starts with a path of probability distributions, introduces a velocity field through a continuity equation, and then derives a training objective. While mathematically correct, this can feel indirect: the key objects appear before it is clear where they come from.
+Despite its elegance, I often found the standard presentation hard to follow. One usually starts with a path of probability distributions, introduces a velocity field through a continuity equation, and then derives a training objective. Mathematically this is natural, but conceptually it can feel indirect.
 
-In this post, I want to tell the story in the opposite direction.
+In this post, I want to tell the story in the opposite direction: instead of beginning with probability densities, we begin with paths in sample space.
 
-Instead of beginning with probability densities, we begin with paths in sample space. A deterministic curve connecting two points can be turned into a random path by randomizing its endpoints. Taking laws along this random path then gives an explicit path of probability measures.
+The guiding idea is simple. A deterministic curve connecting two points can be turned into a random path by randomizing its endpoints. Taking laws along this random path then gives an explicit path of probability measures, connecting a simple source distribution $\mu_0$ chosen by us to a target distribution $\mu_1$ observed through samples.
 
-This gives a concrete bridge from a simple source distribution $\mu_0$, chosen by us, to a target distribution $\mu_1$, observed only through samples. Flow matching is the problem of learning the velocity field of this bridge.
-
-We will make this precise from first principles: construct the path, derive its velocity field, and show why the usual flow matching objective is just least squares regression onto a pathwise velocity.
+From this point of view, flow matching is the problem of learning the velocity field of this bridge. We will construct the path, derive its velocity field, and see why the usual flow matching objective is just least squares regression onto a pathwise velocity.
 
 From Curves to Random Paths
 ---------------------------
