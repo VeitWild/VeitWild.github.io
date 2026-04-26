@@ -16,48 +16,15 @@ Introduction
 
 Flow matching is a powerful and elegant idea, but I often found the standard presentations hard to follow.
 
-Typically, one starts with a *path of probability distributions*, introduces a velocity field through a continuity equation, and then derives a training objective using auxiliary constructions such as latent variables and conditional expectations. While mathematically correct, this way of telling the story can feel indirect: the key objects appear before it is clear where they come from or how to construct them explicitly.
+Typically, one starts with a path of probability distributions, introduces a velocity field through a continuity equation, and then derives a training objective. While mathematically correct, this can feel indirect: the key objects appear before it is clear where they come from.
 
-In this post, I would like to take a different approach, one that I personally found much more direct and easier to reason about.
+In this post, I want to tell the story in the opposite direction.
 
-The starting point is simple:
+Instead of beginning with probability densities, we begin with paths in sample space. A deterministic curve connecting two points can be turned into a random path by randomizing its endpoints. Taking laws along this random path then gives an explicit path of probability measures.
 
-> Instead of beginning with probability densities, we begin with **paths in sample space**.
+This gives a concrete bridge from a simple source distribution $\mu_0$, chosen by us, to a target distribution $\mu_1$, observed only through samples. Flow matching is the problem of learning the velocity field of this bridge.
 
-Suppose we want to connect two points $x_0$ and $x_1$ in $\mathbb{R}^d$. Then we can simply write down a deterministic curve joining them. For example, we may take the straight line from $x_0$ to $x_1$, but there is nothing special about this choice. Any sufficiently regular curve connecting the two endpoints will do.
-
-The key observation is that such a deterministic path can be turned into a random path in a completely natural way: replace the deterministic endpoints by random endpoints.
-
-In the generative modeling setting, the endpoint distribution $\mu_1$ is the object we ultimately care about. It is the data distribution, and we only have access to it through samples. The source distribution $\mu_0$, on the other hand, is chosen by us. We usually pick something simple, such as a standard Gaussian, because it is easy to sample from.
-
-Once the endpoints are random, the whole curve becomes random. Its value at each time has a law, and therefore every explicit path in sample space automatically generates a path of probability measures connecting $\mu_0$ to $\mu_1$.
-
-This is the story I want to tell in this post:
-
-> Any deterministic way of connecting two points can be lifted to a random way of connecting two probability distributions.
-
-This gives us a very explicit bridge from a source distribution of our choosing to the target distribution we observe through data.
-
-Why Introduce a Source Distribution?
-------------------------------------
-
-At first, this may seem like an unnecessary complication. Why introduce a source distribution at all? If $\mu_1$ is the distribution we want, why not try to learn it directly?
-
-The reason is that $\mu_1$ is usually difficult. In applications, the data distribution is often multimodal, intrinsically low-dimensional, and highly structured. Images, for example, do not fill the ambient pixel space in any simple way. They concentrate near a complicated subset that is hard to describe directly.
-
-By contrast, $\mu_0$ is chosen to be simple. A standard Gaussian is centered at the origin, unimodal, smooth, and easy to sample from. We therefore try to build a bridge from something simple and fully under our control to something complex that we only know through observations.
-
-The bridge is described by a velocity field. Instead of learning the target distribution all at once, we learn how to move particles gradually from the source distribution toward the data distribution.
-
-There is a deep mathematical fact behind this picture: under suitable regularity assumptions, a path of probability measures can be described by a velocity field through the continuity equation. In our case, however, the path is not mysterious. We wrote it down explicitly in sample space. The natural question is therefore: what velocity field describes the distributional motion induced by this random path?
-
-The answer is intuitive. At a point $x$ and time $t$, we average the velocities of all random paths passing through $x$ at that time. This conditional average is the velocity field associated with the random path.
-
-Once this field has been identified, the learning problem becomes clear: approximate the velocity field with a neural network. A simple $L^2$ projection argument then turns the ideal, generally intractable objective into a tractable regression problem against the pathwise velocity.
-
-This is the point of view I want to develop. We first write down explicit random paths, then derive their velocity fields, and finally obtain the flow matching objective as an ordinary least squares problem.
-
-In the remainder of this post, we make this precise. We start from an explicit random path $X_t$, derive the associated velocity field, and show how the standard flow matching objective arises directly from this construction.
+We will make this precise from first principles: construct the path, derive its velocity field, and show why the usual flow matching objective is just least squares regression onto a pathwise velocity.
 
 From Curves to Random Paths
 ---------------------------
